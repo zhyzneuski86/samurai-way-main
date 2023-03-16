@@ -1,10 +1,10 @@
 import React from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {User} from "../../../index";
+import {PostType} from "../../../redux/state";
 
 type MyPostsType = {
-    posts:Array<User>
+    posts:Array<PostType>
 }
 
 

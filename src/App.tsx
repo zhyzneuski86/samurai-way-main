@@ -1,20 +1,25 @@
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-import {User, userDialogs, userMessages} from "./index";
+
+import {DialogPageType, ProfilePageType, RootStateType} from "./redux/state";
+
+
 
 
 type AppPropsType = {
-    posts: User[]
-    dialogs: userDialogs[]
-    messages: userMessages[]
+    state: PropsWithChildren<RootStateType>
+    // posts: PostType[]
+    // dialogs: DialogType[]
+    // messages: MessageType[]
+
+    // profilePage:ProfilePageType
+    //     dialogPage:DialogPageType
+
 }
 
 
@@ -29,8 +34,8 @@ const App: React.FC<AppPropsType> = (props) => {
             < Header/>
             < Nav/>
             <div className='app-wrapper-content'>
-                <Route path={'/Dialogs'} render={()=><Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
-                <Route path={'/Profile'} render={()=><Profile posts={props.posts}/>}/>
+                <Route path={'/Dialogs'} render={()=><Dialogs dialogPage={props.state.dialogPage}/>}/>
+                <Route path={'/Profile'} render={()=><Profile profilePage={props.state.profilePage}/>}/>
                 {/*<Route path={'/News'} component={News}/>*/}
                 {/*<Route path={'/Music'} component={Music}/>*/}
                 {/*<Route path={'/Settings'} component={Settings}/>*/}
