@@ -1,3 +1,4 @@
+import {message} from "antd";
 
 export type MessageType = {
     id: number
@@ -59,6 +60,15 @@ export const state: RootStateType = {
         ]
     },
     nav: {}
+}
+
+export let addPost = (postMessage: string) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost)
 }
 
 export default state;
