@@ -4,9 +4,9 @@ import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {Route} from "react-router-dom";
+import { Route} from "react-router-dom";
 
-import {RootStateType, updateNewPostText} from "./redux/state";
+import {RootStateType} from "./redux/state";
 
 
 type AppPropsType = {
@@ -31,9 +31,7 @@ const App: React.FC<AppPropsType> = (props) => {
                     addPost={props.addPost}
                     updateNewPostText={props.updateNewPostText}
                 />}/>
-                {/*<Route path={'/News'} component={News}/>*/}
-                {/*<Route path={'/Music'} component={Music}/>*/}
-                {/*<Route path={'/Settings'} component={Settings}/>*/}
+
             </div>
         </div>
 

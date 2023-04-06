@@ -1,5 +1,10 @@
 
-import {rerenderEntireTree} from "../render";
+let onChange = () => {
+    console.log('hello')
+}
+export const subscribe = (callback: ()=>void) => {
+    onChange = callback
+}
 
 export type MessageType = {
     id: number
@@ -65,7 +70,7 @@ export const state: RootStateType = {
     nav: {}
 }
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -73,12 +78,13 @@ export let addPost = () => {
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireTree(state)
+    onChange()
 }
-export let updateNewPostText = (newText: string) => {
-
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    rerenderEntireTree(state)
+    onChange()
 }
+
+
 
 export default state;
