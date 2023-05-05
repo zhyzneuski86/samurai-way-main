@@ -1,21 +1,12 @@
 
-let onChange = () => {
-    console.log('hello')
-}
-export const subscribe = (callback: ()=>void) => {
-    onChange = callback
-}
-
 export type MessageType = {
     id: number
     message: string
 }
-
 export type DialogType = {
     id: number
     name: string
 }
-
 export type PostType = {
     id: number
     message: string
@@ -25,21 +16,27 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
 }
-
 export type NavType = {}
-
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogPage: DialogPageType
     nav: NavType
 }
 
-export const state: RootStateType = {
+export type storeType ={
+    _state: RootStateType
+    updateNewPostText: (newText: string)=>void
+    addPost: ()=>void
+    _onChange: ()=>void
+    subscribe:(callback: ()=>void)=>void
+    getState: ()=> RootStateType
+}
+const store: storeType ={
+    _state: {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi, Why are you?', likesCount: 10},
@@ -68,23 +65,30 @@ export const state: RootStateType = {
         ]
     },
     nav: {}
-}
-
-export const addPost = () => {
-    let newPost = {
-        id: 5,
-        message: state.profilePage.newPostText,
-        likesCount: 0
+},
+    updateNewPostText (newText: string) {
+        this._state.profilePage.newPostText = newText
+        this._onChange()
+    },
+   addPost () {
+        let newPost = {
+            id: 5,
+            message: this._state.profilePage.newPostText,
+            likesCount: 0
+        }
+        this._state.profilePage.posts.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this._onChange()
+    },
+    _onChange () {
+        console.log('state change')
+    },
+     subscribe (callback) {
+        this._onChange = callback
+    },
+    getState(){
+        return this._state
     }
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText = ''
-    onChange()
-}
-export const updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText
-    onChange()
 }
 
-
-
-export default state;
+export default store;

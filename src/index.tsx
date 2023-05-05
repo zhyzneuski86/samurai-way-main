@@ -1,9 +1,9 @@
 import React from 'react';
 import './index.css';
-import  {subscribe} from "./redux/state";
 import {renderTree} from "./render";
+import store from "./redux/state";
 
 
+
+store.subscribe(renderTree)
 renderTree()
-subscribe(renderTree)
-

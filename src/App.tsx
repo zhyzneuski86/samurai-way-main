@@ -6,18 +6,17 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import { Route} from "react-router-dom";
 
-import {RootStateType} from "./redux/state";
+import { storeType} from "./redux/state";
 
 
 type AppPropsType = {
-    state: PropsWithChildren<RootStateType>
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    store: storeType
 }
 
 
 const App: React.FC<AppPropsType> = (props) => {
 
+    const state=props.store.getState()
 
     return (
 
@@ -25,11 +24,11 @@ const App: React.FC<AppPropsType> = (props) => {
             < Header/>
             < Nav/>
             <div className='app-wrapper-content'>
-                <Route path={'/Dialogs'} render={() => <Dialogs dialogPage={props.state.dialogPage}/>}/>
+                <Route path={'/Dialogs'} render={() => <Dialogs dialogPage={state.dialogPage}/>}/>
                 <Route path={'/Profile'} render={() => <Profile
-                    profilePage={props.state.profilePage}
-                    addPost={props.addPost}
-                    updateNewPostText={props.updateNewPostText}
+                    profilePage={state.profilePage}
+                    addPost={props.store.addPost.bind(props.store)}
+                    updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                 />}/>
 
             </div>
