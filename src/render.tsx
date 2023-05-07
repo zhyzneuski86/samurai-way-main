@@ -10,10 +10,6 @@ import {BrowserRouter} from "react-router-dom";
 export let renderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            {/*<App state={state}*/}
-            {/*     addPost={addPost}*/}
-            {/*     updateNewPostText={updateNewPostText}*/}
-            {/*/>*/}
             <App store={store}/>
         </BrowserRouter>,
 

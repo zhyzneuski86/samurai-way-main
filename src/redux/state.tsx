@@ -28,16 +28,12 @@ export type RootStateType = {
 
 export type storeType = {
     _state: RootStateType
-    //updateNewPostText: (newText: string) => void
-   //addPost: () => void
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsType)=>void
 }
-export type ActionsType=AddPostActionType | ChangeNewTextActionType
-
-
+export type ActionsType = AddPostActionType | ChangeNewTextActionType
 type AddPostActionType={
     type: 'ADD-POST'
     // newPostText: string
@@ -82,21 +78,6 @@ const store: storeType = {
         console.log('state change')
     },
 
-    // updateNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._onChange()
-    // },
-    // addPost() {
-    //     const newPost = {
-    //         id: 5,
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost)
-    //     this._state.profilePage.newPostText = ''
-    //     this._onChange()
-    // },
-
     subscribe(callback) {
         this._onChange = callback
     },
@@ -120,5 +101,8 @@ const store: storeType = {
 
     }
 }
+export const addPostActionCreator = (): AddPostActionType => ({type: 'ADD-POST'})
+export const updateNewPostTextActionCreator = (text:string): ChangeNewTextActionType =>
+{return {type: "CHANGE-NEW-TEXT", newText: text}}
 
 export default store;
