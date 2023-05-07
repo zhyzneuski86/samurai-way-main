@@ -1,11 +1,10 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import { Route} from "react-router-dom";
-
 import { storeType} from "./redux/state";
 
 
@@ -27,8 +26,9 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Route path={'/Dialogs'} render={() => <Dialogs dialogPage={state.dialogPage}/>}/>
                 <Route path={'/Profile'} render={() => <Profile
                     profilePage={state.profilePage}
-                    addPost={props.store.addPost.bind(props.store)}
-                    updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                    dispatch={props.store.dispatch.bind(props.store)}
+                    //addPost={props.store.addPost.bind(props.store)}
+                    //updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                 />}/>
 
             </div>
