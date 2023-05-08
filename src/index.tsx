@@ -5,5 +5,5 @@ import store from "./redux/state";
 
 
 
-store.subscribe(renderTree)
+store.subscriber(renderTree)
 renderTree()
