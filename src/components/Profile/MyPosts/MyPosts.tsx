@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {ActionsType, PostType } from "../../../redux/state";
+import {ActionsType, PostType } from "../../../redux/store";
 import {  addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 type MyPostsType = {
@@ -13,7 +13,7 @@ type MyPostsType = {
 
     const MyPosts: React.FC<MyPostsType> = (props) => {
 
-
+        console.log(props.newPostText)
     let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     let addPost = () => {

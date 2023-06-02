@@ -1,8 +1,8 @@
 import React from 'react';
-import {ActionsType, DialogType, MessageType} from "./state";
+import {ActionsType, DialogType, MessageType} from "./store";
 
 
-type DialogsReducerType = {
+export type DialogsReducerType = {
     newMessageBody: string
     messages: Array<MessageType>
     dialogs: Array<DialogType>

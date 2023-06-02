@@ -1,5 +1,5 @@
 import React from 'react';
-import store, {ActionsType, PostType} from "./state";
+import store, {ActionsType, PostType} from "./store";
 
 type ProfileReducerType = {
     posts: PostType[]
@@ -29,6 +29,7 @@ const ProfileReducer = (state = initState, action: ActionsType): ProfileReducerT
             state.newPostText = ''
             return state
         case "CHANGE-NEW-TEXT":
+
             state.newPostText = action.newText
             return state
         default:

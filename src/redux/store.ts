@@ -30,9 +30,7 @@ export type RootStateType = {
     dialogPage: DialogPageType
     nav: NavType
 }
-// export type newMessageBodyType = {
-//     newMessageBody: string
-// }
+
 export type storeType = {
     _state: RootStateType
     _onChange: () => void
@@ -42,16 +40,6 @@ export type storeType = {
     dispatch: (action: ActionsType)=>void
 }
 
-// type AddPostActionType={
-//     type: 'ADD-POST'
-//     // newPostText: string
-// }
-// type ChangeNewTextActionType={
-//     type: 'CHANGE-NEW-TEXT'
-//     newText: string
-// }
-// type AddPostActionType= ReturnType<typeof addPostActionCreator>
-// type updateNewPostTextActionCreator= ReturnType<typeof updateNewPostTextActionCreator>
 
 export type ActionsType = ReturnType<typeof addPostActionCreator>  |
     ReturnType<typeof updateNewPostTextActionCreator> |
@@ -105,39 +93,9 @@ const store: storeType = {
         this._state.dialogPage = DialogsReducer(this._state.dialogPage, action)
         this._state.nav = NavReducer(this._state.nav, action)
         this._onChange()
-        //this._onChange(this._state)
 
-        // if (action.type === 'ADD-POST'){
-        //     const newPost = {
-        //         id: new Date().getTime(),
-        //         message: this._state.profilePage.newPostText,
-        //         likesCount: 0
-        //     }
-        //     this._state.profilePage.posts.push(newPost)
-        //     this._state.profilePage.newPostText = ''
-        //     this._onChange()
-        // } else if (action.type=== 'CHANGE-NEW-TEXT'){
-        //     this._state.profilePage.newPostText = action.newText
-        //     this._onChange()
-        // } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
-        //     this._state.dialogPage.newMessageBody = action.body
-        //     this._onChange()
-        // }else if (action.type === 'SEND-MESSAGE'){
-        //     const body = this._state.dialogPage.newMessageBody
-        //     this._state.dialogPage.newMessageBody = ''
-        //     this._state.dialogPage.messages.push( {id: 7, message: body})
-        //     this._onChange()
-        //     //this._callSubscriber(this._state)
-        // }
     }
 }
-// export const addPostActionCreator = () => ({type: 'ADD-POST'} as const)
-// export const updateNewPostTextActionCreator = (text:string) =>
-// {return {type: "CHANGE-NEW-TEXT", newText: text} as const}
-
-// export const sendMessageAC = () => ({type: 'SEND-MESSAGE'} as const)
-// export const updateNewMessageBodyAC = (text:string) =>
-// {return {type: "UPDATE-NEW-POST-TEXT", body: text} as const}
 
 export default store;
 // window.store=store

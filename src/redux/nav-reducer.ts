@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActionsType} from "./state";
+import {ActionsType} from "./store";
 
 type NavReducerType = {}
 const initState: NavReducerType = {
