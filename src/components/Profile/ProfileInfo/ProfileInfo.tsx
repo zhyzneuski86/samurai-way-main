@@ -13,9 +13,6 @@ const ProfileInfo = () => {
                 ava + description
             </div>
 
-
-
-
         </div>
     )
 }
