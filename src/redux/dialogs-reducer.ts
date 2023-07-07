@@ -1,15 +1,21 @@
-import React from 'react';
-import {ActionsType, DialogType, MessageType} from "./store";
 
+export type DialogType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    id: number
+    message: string
+}
 
-export type DialogsReducerType = {
+export type initStateType = {
     newMessageBody: string
     messages: Array<MessageType>
     dialogs: Array<DialogType>
 }
 
 
-const initState: DialogsReducerType = {
+const initState: initStateType = {
     dialogs: [
         {id: 1, name: 'Sasha'},
         {id: 2, name: 'Misha'},
@@ -29,7 +35,10 @@ const initState: DialogsReducerType = {
     newMessageBody: ''
 }
 
-  const DialogsReducer  = (state= initState, action: ActionsType): DialogsReducerType => {
+type ActionsType = ReturnType<typeof sendMessageAC> | ReturnType<typeof updateNewMessageBodyAC>
+
+
+  const DialogsReducer  = (state= initState, action: ActionsType): initStateType => {
       switch (action.type) {
           case 'UPDATE-NEW-POST-TEXT':
               state.newMessageBody = action.body

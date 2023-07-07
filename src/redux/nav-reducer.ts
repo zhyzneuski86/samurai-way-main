@@ -1,7 +1,10 @@
-import React from 'react';
-import {ActionsType} from "./store";
+
+import {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+
 
 type NavReducerType = {}
+type ActionsType = ReturnType<typeof addPostActionCreator>  | ReturnType<typeof updateNewPostTextActionCreator>
+
 const initState: NavReducerType = {
     nav: {}
 }

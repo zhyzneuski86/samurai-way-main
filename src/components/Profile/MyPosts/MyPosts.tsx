@@ -1,20 +1,10 @@
 import React, {useState} from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/store";
-// import {  addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
-
-type MyPostsType = {
-    posts: Array<PostType>
-    // newPostText: string
-    // dispatch: (action: ActionsType) => void
-    updateNewPostText: (text: string)=>void
-    addPost: ()=>void
-    newPostText: string
-}
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 
-    const MyPosts: React.FC<MyPostsType> = (props) => {
+    const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
 
     let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
