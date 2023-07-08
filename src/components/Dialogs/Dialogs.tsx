@@ -2,8 +2,20 @@ import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+// import {DialogsReducerType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+
 import {dialogsPropsType} from "./DialogsContainer";
 
+
+
+// type dialogsPropsType = {
+//     // store: DialogsReducerType
+//     // dispatch: any
+//
+//     updateNewMessageBody: (body: string)=>void
+//     sendMessage:()=>void
+//     dialogPage: DialogPageType
+// }
 
 const Dialogs: React.FC<dialogsPropsType> = (props) => {
     // const state = props.store.getState().dialogPage
@@ -12,12 +24,12 @@ const Dialogs: React.FC<dialogsPropsType> = (props) => {
     const messageElements = props.dialogPage.messages.map(m => <Message message={m.message}/>)
     const newMessageBody = props.dialogPage.newMessageBody
 
-    const onSendMessageClick = () => {props.sendMessage()}            //delete 'Hello'
+    const onSendMessageClick = () => {props.sendMessage()}
     // const onSendMessageClick = () => {props.dispatch(sendMessageAC())}
 
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
       const body=e.currentTarget.value
-        props.updateNewMessageBody(body)                                           //add body
+        props.updateNewMessageBody(body)
         //props.dispatch(updateNewMessageBodyAC(body))
     }
     return (

@@ -39,15 +39,25 @@ type ActionsType = ReturnType<typeof sendMessageAC> | ReturnType<typeof updateNe
 
 
   const DialogsReducer  = (state= initState, action: ActionsType): initStateType => {
+
+    // let stateCopy = {...state}
+
       switch (action.type) {
           case 'UPDATE-NEW-POST-TEXT':
-              state.newMessageBody = action.body
-              return state
+              // state.newMessageBody = action.body
+              // return state
+              return {...state, newMessageBody: action.body}
           case "SEND-MESSAGE":
-              const body = state.newMessageBody
-              state.newMessageBody = ''
-              state.messages.push({id: 7, message: body})
-              return state
+
+              // const body = state.newMessageBody
+              // state.newMessageBody = ''
+              // state.messages.push({id: 7, message: body})
+              // return state
+              let newMessage = {
+                  id: new Date().getTime(),
+                  message: state.newMessageBody
+              }
+              return {...state, messages: [...state.messages, newMessage], newMessageBody: ''}
           default:
               return state
       }

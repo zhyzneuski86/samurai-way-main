@@ -21,29 +21,6 @@ type mapDispatchToPropsType = {
 export type MyPostsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 
-// const MyPostsContainer: React.FC<MyPostsContainerType> = () => {
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {
-//                 (store) => {
-//                     let state = store.getState()
-//
-//                     let addPost = () => {store.dispatch(addPostActionCreator())}
-//                     let onPostChange = (text: string) => {
-//                         let action = updateNewPostTextActionCreator(text)
-//                         store.dispatch(action)
-//                     }
-//                     return <MyPosts updateNewPostText={onPostChange}
-//                                     addPost={addPost}
-//                                     posts={state.profilePage.posts}
-//                                     newPostText={state.profilePage.newPostText}/>
-//                 }
-//             }
-//         </StoreContext.Consumer>
-//     )
-// }
-
 const mapStateToProps = (state: AppStateType): mapStateToPropsType =>{
     return {
         posts: state.profilePage.posts,
