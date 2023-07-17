@@ -1,18 +1,20 @@
-export type UserLocationTpy = {
-    city: string;
-    country: string;
-};
+// export type UserLocationTpy = {
+//     city: string;
+//     country: string;
+// };
+//
+// export type UserType = {
+//     id: number;
+//     photoUrl: string;
+//     followed: boolean;
+//     fullName: string;
+//     status: string;
+//     location: UserLocationTpy;
+// };
+import {UserItem} from "../components/Users/Users";
 
-export type UserType = {
-    id: number;
-    photoUrl: string;
-    followed: boolean;
-    fullName: string;
-    status: string;
-    location: UserLocationTpy;
-};
 type InitStateType = {
-    users: UserType[];
+    users: UserItem[];
 };
 const InitStateType: InitStateType = {
     users: [
@@ -77,7 +79,7 @@ export const unFollowAC = (userId: number) => {
     return {type: "UNFOLLOW", userId} as const
 }
 
-export const setUsersAC = (users: UserType[]) => {
+export const setUsersAC = (users: UserItem[]) => {
     return {type: "SET_USERS", users} as const
 }
 

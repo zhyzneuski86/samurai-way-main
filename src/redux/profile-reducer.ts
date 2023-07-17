@@ -6,21 +6,23 @@ export type PostType = {
     message: string
     likesCount: number
 }
-export type initStateType = {
-    posts: Array<PostType>
-    newPostText: string
-}
+// export type initStateType = {
+//     posts: Array<PostType>
+//     newPostText: string
+// }
+export type initStateType = typeof initState
 
-const initState: initStateType = {
+const initState = {
     posts: [
         {id: 1, message: 'Hi, Why are you?', likesCount: 10},
         {id: 2, message: 'It\'s my first post!', likesCount: 15},
         {id: 3, message: 'It\'s my first post!', likesCount: 20},
         {id: 4, message: 'It\'s my first post!', likesCount: 23}
-    ],
+    ] as Array<PostType>,
     newPostText: ''
 
 }
+
 
 type ActionsType = ReturnType<typeof addPostActionCreator>  | ReturnType<typeof updateNewPostTextActionCreator>
 
