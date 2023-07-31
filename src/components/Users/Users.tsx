@@ -1,13 +1,27 @@
 import React from 'react';
-import {usersPropsType} from "./UsersContainer";
+import {UserItem} from "./UsersContainer";
 import styles from './usersStyle.module.css'
 
 
-type Props = usersPropsType &  {
+// type Props = usersPropsType &  {
+//     onPageChange: (page: number) => void
+// }
+
+type usersPropsType = {
     onPageChange: (page: number) => void
+    users: UserItem[]
+    pageSize: number
+    totalUserCount: number
+    currentPage: number
+    follow:(useId:number) => void
+    unfollow: (useId:number) => void
+    setUser: (users: UserItem[])=> void
+    setCurrentPage: (currentPage: number)=>void
+    setTotalUserCount: (totalUserCount: number)=>void
+
 }
 
-const Users = (props: Props) => {
+const Users = (props: usersPropsType) => {
 
     let pages: Array<number> = []
     const pageCount = Math.ceil( props.totalUserCount /  props.pageSize)

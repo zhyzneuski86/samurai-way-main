@@ -1,18 +1,19 @@
+import {UserItem} from "../components/Users/UsersContainer";
 
-
-import {UserItem} from "../components/Users/UsersAPIComponent";
 
 type InitStateType = {
     users: UserItem[]
     pageSize: number,
     totalUserCount: number
     currentPage: number
+    isFetching: boolean
 };
 const InitStateType: InitStateType = {
     users: [],
     pageSize: 10,
     totalUserCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 type ActionsType = ReturnType<typeof followAC>
@@ -20,6 +21,7 @@ type ActionsType = ReturnType<typeof followAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUserCountAC>
+    | ReturnType<typeof toggeleIsFetchingAC>
 
 
 const UsersReducer = (state = InitStateType, action: ActionsType): InitStateType => {
@@ -48,6 +50,8 @@ const UsersReducer = (state = InitStateType, action: ActionsType): InitStateType
 
         case 'SET_USER_TOTAL_COUNT':
             return {...state, totalUserCount: action.totalUserCount}
+        case "TOGGELE_IS_FETCHING":
+            return {...state, isFetching: action.isFetching}
         default:
             return state
     }
@@ -67,6 +71,9 @@ export const setCurrentPageAC = (currentPage: number) => {
 }
 export const setTotalUserCountAC = (totalUserCount: number) => {
     return {type: "SET_USER_TOTAL_COUNT", totalUserCount} as const
+}
+export const toggeleIsFetchingAC = (isFetching: boolean) => {
+    return {type: "TOGGELE_IS_FETCHING", isFetching} as const
 }
 
 
