@@ -21,7 +21,7 @@ const App: React.FC<AppPropsType> = (props) => {
             <div className='app-wrapper-content'>
                 <Route path='/Dialogs' render={() => <DialogsContainer  />}/>
                 <Route path='/Profile' render={() => <Profile  />}/>
-                <Route path='/users' render={() => <UsersContainer/>}/>
+                <Route path='/users' render={() => <UsersContainer />}/>
 
             </div>
         </div>
