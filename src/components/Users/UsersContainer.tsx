@@ -1,6 +1,5 @@
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
@@ -39,9 +38,9 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
         this.props.toggeleIsFetching(true)
         axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((res) => {
-                this.props.toggeleIsFetching(false)
                 this.props.setUsers(res.data.items)
                 this.props.setTotalUserCount(res.data.totalCount)
+                this.props.toggeleIsFetching(false)
             })
     }
 
@@ -50,9 +49,8 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
         this.props.toggeleIsFetching(true)
         axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then((res) => {
-                this.props.toggeleIsFetching(false)
                 this.props.setUsers(res.data.items)
-
+                this.props.toggeleIsFetching(false)
             })
     }
 
@@ -86,8 +84,8 @@ type mapStateToPropsType = {
     isFetching: boolean
 }
 type mapDispatchToPropsType = {
-    follow: (useId: number) => void
-    unfollow: (useId: number) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
     setUsers: (users: UserItem[]) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUserCount: (totalUserCount: number) => void

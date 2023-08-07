@@ -1,11 +1,7 @@
 import React from 'react';
 import {UserItem} from "./UsersContainer";
 import styles from './usersStyle.module.css'
-
-
-// type Props = usersPropsType &  {
-//     onPageChange: (page: number) => void
-// }
+import {NavLink} from "react-router-dom";
 
 type usersPropsType = {
     onPageChange: (page: number) => void
@@ -43,10 +39,13 @@ const Users = (props: usersPropsType) => {
                 <div>
 
                     <div>
-                        < img
-                            width="100px"
-                            src={u.photos.small || "https://drevnerus.ru/drevnerus.ru/public_html/wp-content/uploads/2011/12/volhvy-2.jpg"}
-                            alt="photoProfile"/>
+                        <NavLink to={'/Profile/' + u.id}>
+                            < img
+                                width="100px"
+                                src={u.photos.small || "https://drevnerus.ru/drevnerus.ru/public_html/wp-content/uploads/2011/12/volhvy-2.jpg"}
+                                alt="photoProfile"/>
+                        </NavLink>
+
                     </div>
                     <div>
                         {u.followed ?
