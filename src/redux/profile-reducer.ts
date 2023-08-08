@@ -29,7 +29,7 @@ export type ProfileResponseType = {
 type InitStateType = {
     posts: PostType[]
     newPostText: string,
-    profile: ProfileResponseType| null
+    profile: ProfileResponseType | null
 };
 
 
@@ -40,7 +40,7 @@ const initState: InitStateType = {
         {id: 3, message: 'It\'s my first post!', likesCount: 20},
         {id: 4, message: 'It\'s my first post!', likesCount: 23}
     ] ,
-    profile:null,
+    profile: null,
     newPostText: ''
 
 }

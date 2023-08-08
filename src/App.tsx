@@ -5,7 +5,7 @@ import Nav from "./components/Nav/Nav";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 type AppPropsType = {
@@ -20,7 +20,7 @@ const App: React.FC<AppPropsType> = (props) => {
             < Nav/>
             <div className='app-wrapper-content'>
                 <Route path='/Dialogs' render={() => <DialogsContainer  />}/>
-                <Route path='/Profile' render={() => <ProfileContainer  />}/>
+                <Route path='/Profile/: userId?' render={() => <ProfileContainer  />}/>
                 <Route path='/users' render={() => <UsersContainer />}/>
 
             </div>
