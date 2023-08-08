@@ -3,12 +3,14 @@ import ProfileReducer from "./profile-reducer";
 import DialogsReducer from "./dialogs-reducer";
 import NavReducer from "./nav-reducer";
 import UsersReducer from "./Users-reducer";
+import authReducer from "./auth-reducer";
 
 const rootReducer = combineReducers({
     profilePage: ProfileReducer,
     dialogPage: DialogsReducer,
     nav: NavReducer,
-    usersPage: UsersReducer
+    usersPage: UsersReducer,
+    auth: authReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>
