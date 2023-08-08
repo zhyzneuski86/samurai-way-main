@@ -1,5 +1,3 @@
-
-
 export type DataType = {
     id: number | null,
     email: string | null,
@@ -25,11 +23,9 @@ const InitStateType: InitStateType = {
     // },
     // isAuth: false
 
-        id:  null,
-        email:  null,
-        login: null,
-        // isFetching: null
-
+    id: null,
+    email: null,
+    login: null,
     isAuth: false
 
 }
@@ -37,14 +33,12 @@ const InitStateType: InitStateType = {
 type ActionsType = ReturnType<typeof setAuthUserData>
 
 
-
-
 const authReducer = (state = InitStateType, action: ActionsType): InitStateType => {
     switch (action.type) {
         case "SET-USER-DATA":
             return {
                 ...state,
-       ...action.data,
+                ...action.data,
                 isAuth: true
             }
 
@@ -55,9 +49,6 @@ const authReducer = (state = InitStateType, action: ActionsType): InitStateType 
 
 export const setAuthUserData = (data: DataType, isAuth: boolean) => (
     {type: "SET-USER-DATA", data, isAuth} as const)
-
-
-
 
 
 export default authReducer;

@@ -9,37 +9,39 @@ import {
 
 } from "../../redux/Users-reducer";
 import React from "react";
-import axios from "axios";
+//import axios from "axios";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
+import {usersAPI, UserItem} from "../../api/api";
 
 
-export type UserItem = {
-    name: string,
-    id: number,
-    photos: {
-        small: string | null;
-        large: string | null;
-    };
-    status: string | null;
-    followed: boolean;
-}
-
-export type  UsersResponse = {
-    error: string | null;
-    items: Array<UserItem>
-    totalCount: number
-}
+// export type UserItem = {
+//     name: string,
+//     id: number,
+//     photos: {
+//         small: string | null;
+//         large: string | null;
+//     };
+//     status: string | null;
+//     followed: boolean;
+// }
+//
+// export type  UsersResponse = {
+//     error: string | null;
+//     items: Array<UserItem>
+//     totalCount: number
+// }
 
 
 export class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     componentDidMount() {
         this.props.toggeleIsFetching(true)
-        axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then((res) => {
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUserCount(res.data.totalCount)
+        //axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then((data) => {
+                this.props.setUsers(data.items)
+                this.props.setTotalUserCount(data.totalCount)
                 this.props.toggeleIsFetching(false)
             })
     }
@@ -47,9 +49,10 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
     onPageChange = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggeleIsFetching(true)
-        axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then((res) => {
-                this.props.setUsers(res.data.items)
+        //axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then((data) => {
+                this.props.setUsers(data.items)
                 this.props.toggeleIsFetching(false)
             })
     }

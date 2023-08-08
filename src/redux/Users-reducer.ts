@@ -1,4 +1,4 @@
-import {UserItem} from "../components/Users/UsersContainer";
+import {UserItem} from "../api/api";
 
 
 type InitStateType = {

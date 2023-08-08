@@ -27,18 +27,10 @@ class HeaderContainer extends React.Component<AuthContainerPropsType> {
     }
 }
 
-// type PathParamsType = {
-//     userId:  string | undefined
-// }
-// export type CommonProfileContainerPropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
-
 type mapStateToPropsType = {
-    // resultCode: number | null,
-    // messages: [],
-
  isAuth: boolean
-
 } & DataType
+
 type mapDispatchToPropsType = {
     setAuthUserData: ( data: DataType, isAuth: boolean)=>void
 }
@@ -47,8 +39,6 @@ export type AuthContainerPropsType = mapStateToPropsType & mapDispatchToPropsTyp
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        // resultCode: state.auth.resultCode,
-        // messages: state.auth.messages,
          ...state.auth,
         isAuth: state.auth.isAuth
     }
@@ -57,10 +47,3 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
  export default  connect(mapStateToProps, {
      setAuthUserData,
 })(HeaderContainer)
-
-
-// const WithUrlDataContainerComponent =  withRouter(HeaderContainer)
-//
-// export default connect(mapStateToProps, {
-//     setUserProfile,
-// })(WithUrlDataContainerComponent)

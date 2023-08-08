@@ -1,7 +1,8 @@
 import React from 'react';
-import {UserItem} from "./UsersContainer";
+
 import styles from './usersStyle.module.css'
 import {NavLink} from "react-router-dom";
+import {UserItem} from "../../api/api";
 
 type usersPropsType = {
     onPageChange: (page: number) => void
