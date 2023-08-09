@@ -16,7 +16,8 @@ type usersPropsType = {
     setUser: (users: UserItem[]) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUserCount: (totalUserCount: number) => void
-
+    toggleFollowProgress: (isFetching: boolean, userId: number) => void
+    followingInProgress: Array<number>
 }
 type postDeleteResponseType = {
     resultCode: number
@@ -55,7 +56,8 @@ const Users = (props: usersPropsType) => {
                         </div>
                         <div>
                             {u.followed ?
-                                <button onClick={() => {
+                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowProgress(true, u.id)
                                     axios.delete<postDeleteResponseType>(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {
                                         withCredentials: true,
                                         headers: {
@@ -64,13 +66,15 @@ const Users = (props: usersPropsType) => {
                                     })
                                         .then((res) => {
                                             if (res.data.resultCode === 0) {
-                                                props.follow(u.id)
+                                                props.unfollow(u.id)
                                             }
+                                            props.toggleFollowProgress(false, u.id)
                                         })
-                                    props.unfollow(u.id)
+
 
                                 }}>Unfollow</button>
-                                : <button onClick={() => {
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowProgress(true, u.id)
                                     axios.post<postDeleteResponseType>(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {}, {
                                         withCredentials: true,
                                         headers: {
@@ -81,6 +85,7 @@ const Users = (props: usersPropsType) => {
                                             if (res.data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
+                                            props.toggleFollowProgress(false, u.id)
                                         })
 
                                 }}>Follow</button>}
