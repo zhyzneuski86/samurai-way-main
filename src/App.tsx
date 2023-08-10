@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -9,11 +8,13 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 
 
-type AppPropsType = {
-    // store: StoreType
-}
 
-const App: React.FC<AppPropsType> = (props) => {
+// type AppPropsType = {
+//    // store: StoreType
+// }
+
+const App: React.FC = (props) => {
+    console.log('app')
     return (
 
         <div className='app-wrapper'>

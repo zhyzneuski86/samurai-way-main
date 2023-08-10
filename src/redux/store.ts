@@ -1,50 +1,50 @@
-import ProfileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
-import DialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
-import NavReducer from "./nav-reducer";
-
-type MessageType = {
-    id: number
-    message: string
-}
- type DialogType = {
-    id: number
-    name: string
-}
- type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
- type ProfilePageType = {
-    posts: Array<PostType>
-    newPostText: string
-}
- type DialogPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-    newMessageBody: string
-}
- type NavType = {}
- type RootStateType = {
-    profilePage: ProfilePageType
-    dialogPage: DialogPageType
-    nav: NavType
-}
-
- type storeType = {
-    _state: RootStateType
-    _onChange: () => void
-    // _callSubscriber(this._state)=>void
-    subscriber: (callback: () => void) => void
-    getState: () => RootStateType
-    dispatch: (action: ActionsType)=>void
-}
-
-
-type ActionsType = ReturnType<typeof addPostActionCreator>  |
-    ReturnType<typeof updateNewPostTextActionCreator> |
-    ReturnType<typeof sendMessageAC> |
-    ReturnType<typeof updateNewMessageBodyAC>
+ import ProfileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+// import DialogsReducer, {sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+// import NavReducer from "./nav-reducer";
+//
+// type MessageType = {
+//     id: number
+//     message: string
+// }
+//  type DialogType = {
+//     id: number
+//     name: string
+// }
+//  type PostType = {
+//     id: number
+//     message: string
+//     likesCount: number
+// }
+//  type ProfilePageType = {
+//     posts: Array<PostType>
+//     newPostText: string
+// }
+//  type DialogPageType = {
+//     dialogs: Array<DialogType>
+//     messages: Array<MessageType>
+//     newMessageBody: string
+// }
+//  type NavType = {}
+//  type RootStateType = {
+//     profilePage: ProfilePageType
+//     dialogPage: DialogPageType
+//     nav: NavType
+// }
+//
+//  type storeType = {
+//     _state: RootStateType
+//     _onChange: () => void
+//     // _callSubscriber(this._state)=>void
+//     subscriber: (callback: () => void) => void
+//     getState: () => RootStateType
+//     dispatch: (action: ActionsType)=>void
+// }
+//
+//
+// type ActionsType = ReturnType<typeof addPostActionCreator>  |
+//     ReturnType<typeof updateNewPostTextActionCreator> |
+//     ReturnType<typeof sendMessageAC> |
+//     ReturnType<typeof updateNewMessageBodyAC>
 //
 // const store: storeType = {
 //     _state: {

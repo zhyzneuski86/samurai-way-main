@@ -12,7 +12,7 @@ export type InitStateType = {
     isAuth: boolean
 } & DataType;
 
-const InitStateType: InitStateType = {
+const InitState: InitStateType = {
     // resultCode: null,
     // messages: [],
     // data: {
@@ -33,7 +33,7 @@ const InitStateType: InitStateType = {
 type ActionsType = ReturnType<typeof setAuthUserData>
 
 
-const authReducer = (state = InitStateType, action: ActionsType): InitStateType => {
+const authReducer = (state = InitState, action: ActionsType): InitStateType => {
     switch (action.type) {
         case "SET-USER-DATA":
             return {

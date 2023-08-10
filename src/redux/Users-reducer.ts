@@ -1,4 +1,5 @@
-import {UserItem} from "../api/api";
+import {UserItem, usersAPI} from "../api/api";
+import {AppThunkDispatch} from "./redux-store";
 
 
 type InitStateType = {
@@ -9,7 +10,7 @@ type InitStateType = {
     isFetching: boolean
     followingInProgress: Array<number>
 };
-const InitStateType: InitStateType = {
+const initState: InitStateType = {
     users: [],
     pageSize: 10,
     totalUserCount: 0,
@@ -18,8 +19,8 @@ const InitStateType: InitStateType = {
     followingInProgress: []
 }
 
-type ActionsType = ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+type ActionsType = ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUserCount>
@@ -27,7 +28,7 @@ type ActionsType = ReturnType<typeof follow>
     | ReturnType<typeof toggleFollowProgress>
 
 
-const UsersReducer = (state = InitStateType, action: ActionsType): InitStateType => {
+const UsersReducer = (state:InitStateType = initState, action: ActionsType): InitStateType => {
     switch (action.type) {
         case "FOLLOW":
             return {...state,
@@ -66,10 +67,10 @@ const UsersReducer = (state = InitStateType, action: ActionsType): InitStateType
     }
 };
 
-export const follow = (userId: number) => (
+export const followSuccess = (userId: number) => (
     {type: 'FOLLOW', userId} as const)
 
-export const unfollow = (userId: number) => {
+export const unfollowSuccess = (userId: number) => {
     return {type: "UNFOLLOW", userId} as const
 }
 
@@ -90,4 +91,56 @@ export const toggleFollowProgress = (isFetching: boolean, userId: number) => {
 }
 
 
-export default UsersReducer;
+export const getUsers =(currentPage: number, pageSize: number) => {
+    return (dispatch: AppThunkDispatch) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then((data) => {
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUserCount(data.totalCount))
+                dispatch(toggleIsFetching(false))
+            }).catch((err)=>{console.log(err)})
+    }
+}
+// export const getUsersPage =(pageNumber: number,  pageSize: number) => (dispatch: AppThunkDispatch) => {
+//     dispatch(toggleIsFetching(true))
+//     //axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+//     usersAPI.getUsers(pageNumber, pageSize)
+//         .then((data) => {
+//             dispatch(setUsers(data.items))
+//             dispatch(toggleIsFetching(false))
+//         })
+// }
+
+export const follow =(userId: number) => {
+    return (dispatch: AppThunkDispatch) => {
+        console.log('log follow')
+        dispatch(toggleFollowProgress(true, userId))
+        usersAPI.follow(userId)
+            .then((res) => {
+                if (res.data.resultCode === 0) {
+                    dispatch(followSuccess(userId))
+                }
+                dispatch(toggleFollowProgress(false, userId))
+            }).catch((err)=>{console.log(err)})
+    }
+}
+
+export const unfollow =(userId: number) => {
+    return (dispatch: AppThunkDispatch) => {
+        dispatch(toggleFollowProgress(true, userId))
+        usersAPI.unfollow(userId)
+            .then((res) => {
+                if (res.data.resultCode === 0) {
+                    dispatch(unfollowSuccess(userId))
+                }
+                dispatch(toggleFollowProgress(false, userId))
+            })
+    }
+}
+
+
+
+
+
+ export default UsersReducer;

@@ -15,6 +15,14 @@ export const usersAPI = {
         return instance.get<UsersResponse>(`/users?page=${currentPage}&count=${pageSize}`)
             .then(res => res.data)
     },
+    follow(userId: number) {
+        return  instance.post<postDeleteUserResponseType>(`/follow/${userId}`, {})
+
+    },
+    unfollow(userId: number) {
+        return instance.delete<postDeleteUserResponseType>(`/follow/${userId}`)
+    }
+
     //axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
 
     // getTodolists() {
@@ -58,6 +66,11 @@ export type  UsersResponse = {
     error: string | null;
     items: Array<UserItem>
     totalCount: number
+}
+type postDeleteUserResponseType = {
+    resultCode: number
+    messages: [],
+    data: {}
 }
 
 // types
