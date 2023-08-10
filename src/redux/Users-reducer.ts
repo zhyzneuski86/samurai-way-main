@@ -60,7 +60,7 @@ const UsersReducer = (state:InitStateType = initState, action: ActionsType): Ini
             return {...state,
                 followingInProgress: action.isFetching
                 ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         default:
             return state
@@ -102,19 +102,9 @@ export const getUsers =(currentPage: number, pageSize: number) => {
             }).catch((err)=>{console.log(err)})
     }
 }
-// export const getUsersPage =(pageNumber: number,  pageSize: number) => (dispatch: AppThunkDispatch) => {
-//     dispatch(toggleIsFetching(true))
-//     //axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-//     usersAPI.getUsers(pageNumber, pageSize)
-//         .then((data) => {
-//             dispatch(setUsers(data.items))
-//             dispatch(toggleIsFetching(false))
-//         })
-// }
 
 export const follow =(userId: number) => {
     return (dispatch: AppThunkDispatch) => {
-        console.log('log follow')
         dispatch(toggleFollowProgress(true, userId))
         usersAPI.follow(userId)
             .then((res) => {

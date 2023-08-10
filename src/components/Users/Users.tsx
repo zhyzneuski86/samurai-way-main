@@ -12,10 +12,6 @@ type usersPropsType = {
     currentPage: number
     follow: (useId: number) => void
     unfollow: (useId: number) => void
-    //setUser: (users: UserItem[]) => void
-    //setCurrentPage: (currentPage: number) => void
-    //setTotalUserCount: (totalUserCount: number) => void
-    //toggleFollowProgress: (isFetching: boolean, userId: number) => void
     followingInProgress: Array<number>
 }
 
@@ -30,7 +26,9 @@ const Users = (props: usersPropsType) => {
         }
         return <>
             {pages.map((p) => {
-                return <button onClick={() => {props.onPageChange(p)}}
+                return <button onClick={() => {
+                    props.onPageChange(p)
+                }}
                                className={props.currentPage === p ? styles.selectedPage : ''}
                                key={p}>{p}</button>
             })}
@@ -50,29 +48,10 @@ const Users = (props: usersPropsType) => {
                         <div>
                             {u.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                        onClick={() => {props.unfollow(u.id)
-                                    // usersAPI.unfollow(u.id)
-                                    //     .then((res) => {
-                                    //         if (res.data.resultCode === 0) {
-                                    //             props.unfollow(u.id)
-                                    //         }
-                                    //         props.toggleFollowProgress(false, u.id)
-                                    //     })
-
-
-                                }}>Unfollow</button>
+                                        onClick={() => {props.unfollow(u.id)}}>Unfollow</button>
 
                                 : <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                          onClick={() => {props.follow(u.id)
-                                    // usersAPI.follow(u.id)
-                                    //     .then((res) => {
-                                    //         if (res.data.resultCode === 0) {
-                                    //             props.follow(u.id)
-                                    //         }
-                                    //         props.toggleFollowProgress(false, u.id)
-                                    //     })
-
-                                }}>Follow</button>}
+                                          onClick={() => {props.follow(u.id)}}>Follow</button>}
                         </div>
 
                     </div>

@@ -1,8 +1,9 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import UsersResponse from "../components/Users/UsersContainer";
 
+
 const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
         'API-KEY': 'e8e92dc5-8ada-45d5-befd-38d0ba297274'
@@ -12,16 +13,29 @@ const instance = axios.create({
 // api
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get<UsersResponse>(`/users?page=${currentPage}&count=${pageSize}`)
+        return instance.get<UsersResponse>(`users?page=${currentPage}&count=${pageSize}`)
             .then(res => res.data)
     },
     follow(userId: number) {
-        return  instance.post<postDeleteUserResponseType>(`/follow/${userId}`, {})
+        return  instance.post<post_DeleteUserResponseType>(`follow/${userId}`, {})
 
     },
     unfollow(userId: number) {
-        return instance.delete<postDeleteUserResponseType>(`/follow/${userId}`)
+        return instance.delete<post_DeleteUserResponseType>(`follow/${userId}`)
+    },
+    getProfile(userId: string | undefined){
+        return instance.get<ProfileResponseType>(`profile/${userId}`)
     }
+}
+
+    export const authAPI = {
+       me() {
+         return   instance.get<AuthResponseType>(`auth/me`)
+             .then(res => res.data)
+       }
+
+    
+
 
     //axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
 
@@ -67,11 +81,48 @@ export type  UsersResponse = {
     items: Array<UserItem>
     totalCount: number
 }
-type postDeleteUserResponseType = {
+type post_DeleteUserResponseType = {
     resultCode: number
     messages: [],
     data: {}
 }
+
+export type ContactsType = {
+    facebook: string,
+    website: null,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: null,
+    github: string,
+    mainLink: null
+}
+export type PhotosType = {
+    small: string | null,
+    large: string | null
+}
+export type ProfileResponseType = {
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    contacts: ContactsType,
+    photos: PhotosType
+}
+
+
+
+export type DataType = {
+    id: number | null,
+    email: string | null,
+    login: string | null,
+}
+export type AuthResponseType = {
+    resultCode: number | null,
+    messages: [],
+    data: DataType
+}
+
 
 // types
 // export type TodolistType = {

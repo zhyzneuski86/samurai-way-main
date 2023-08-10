@@ -1,30 +1,13 @@
+import {usersAPI, ProfileResponseType} from "../api/api";
+import {AppThunkDispatch} from "./redux-store";
+import {setTotalUserCount, setUsers, toggleIsFetching} from "./Users-reducer";
+
 export type PostType = {
     id: number
     message: string
     likesCount: number
 }
-export type ContactsType = {
-    facebook: string,
-    website: null,
-    vk: string,
-    twitter: string,
-    instagram: string,
-    youtube: null,
-    github: string,
-    mainLink: null
-}
-export type PhotosType = {
-    small: string | null,
-    large: string | null
-}
-export type ProfileResponseType = {
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    userId: number,
-    contacts: ContactsType,
-    photos: PhotosType
-}
+
 
 type InitStateType = {
     posts: PostType[]
@@ -57,8 +40,8 @@ const ProfileReducer = (state = initState, action: ActionsType): InitStateType =
     switch (action.type) {
         case "ADD-POST":
             const newPost = {
-                // id: new Date().getTime(),
-                id: 5,
+                id: new Date().getTime(),
+                // id: 5,
                 message: state.newPostText,
                 likesCount: 0
             }
@@ -81,6 +64,15 @@ export const updateNewPostTextActionCreator = (text: string) => {
 }
 export const setUserProfile = (profile: ProfileResponseType) => {
     return {type: "SET-USER-PROFILE", profile} as const
+}
+
+export const getUserProfile =(userId: string | undefined) => {
+    return (dispatch: AppThunkDispatch) => {
+        usersAPI.getProfile(userId)
+            .then((res) => {
+              dispatch(setUserProfile(res.data))
+            }).catch((err)=>{console.log(err)})
+    }
 }
 
 export default ProfileReducer;
