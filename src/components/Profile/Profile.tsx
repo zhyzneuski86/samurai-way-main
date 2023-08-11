@@ -6,7 +6,6 @@ import {ProfileResponseType} from "../../api/api";
 
 type ProfilePropsType = {
     profile: ProfileResponseType | null
-
 }
 
 

@@ -11,12 +11,10 @@ class HeaderContainer extends React.Component<AuthContainerPropsType> {
     componentDidMount() {
        this.props.getAuthUserData()
     }
-
     render(): React.ReactNode {
         return <Header {...this.props} />
     }
 }
-
 type mapStateToPropsType = {
  isAuth: boolean
 } & DataType
