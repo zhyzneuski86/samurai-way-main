@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./ProfileInfo.module.css";
 import Preloader from "../../../common/Preloader/Preloader";
 import {ProfileResponseType} from "../../../api/api";
+import ProfileStatus from "./ProfileStatus";
 
 
 type ProfileInfoPropsType = {
@@ -16,13 +17,12 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     return (
         <div>
 
-            <div>
-                <img src='https://tinypng.com/images/social/website.jpg'/>
-            </div>
+            {/*<div>*/}
+            {/*    <img src='https://tinypng.com/images/social/website.jpg'/>*/}
+            {/*</div>*/}
             <div className={classes.descriptionBlock}>
                 <img src={props.profile?.photos.large || ""}/>
-               {/*<img src={props.profile.photos.large}/>*/}
-                ava + description
+                <ProfileStatus status={'Hello'}/>
             </div>
 
         </div>
