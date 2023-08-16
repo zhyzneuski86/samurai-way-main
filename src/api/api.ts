@@ -4,10 +4,10 @@ import UsersResponse from "../components/Users/UsersContainer";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    withCredentials: true,
-    headers: {
-        'API-KEY': 'e8e92dc5-8ada-45d5-befd-38d0ba297274'
-    }
+    // withCredentials: true,
+    // headers: {
+    //     'API-KEY': 'e8e92dc5-8ada-45d5-befd-38d0ba297274'
+    // }
 })
 
 // api

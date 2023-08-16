@@ -3,7 +3,6 @@ import classes from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {dialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
 
 // type dialogsPropsType = {
 //     // store: DialogsReducerType
@@ -30,7 +29,6 @@ const Dialogs: React.FC<dialogsPropsType> = (props) => {
         //props.dispatch(updateNewMessageBodyAC(body))
     }
 
-    // if(!props.isAuth) return <Redirect to={'/login'}/>
 
 
     return (
