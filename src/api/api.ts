@@ -23,8 +23,20 @@ export const usersAPI = {
     unfollow(userId: number) {
         return instance.delete<post_DeleteUserResponseType>(`follow/${userId}`)
     },
+    // getProfile(userId: string | undefined){
+    //    // return instance.get<ProfileResponseType>(`profile/${userId}`)
+    //     return profileAPI.getProfile(userId)
+    // }
+}
+export const profileAPI = {
     getProfile(userId: string | undefined){
         return instance.get<ProfileResponseType>(`profile/${userId}`)
+    },
+    getStatus(userId:  string | undefined){
+        return instance.get<any>(`profile/status/${userId}`)
+    },
+    updateStatus(status: string){
+        return instance.put<updateStatusResponseType>(`profile/status`, {status})
     }
 }
 
@@ -82,6 +94,11 @@ export type  UsersResponse = {
     totalCount: number
 }
 type post_DeleteUserResponseType = {
+    resultCode: number
+    messages: [],
+    data: {}
+}
+type updateStatusResponseType = {
     resultCode: number
     messages: [],
     data: {}
