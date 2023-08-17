@@ -14,29 +14,13 @@ export class UsersContainer extends Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
 
-        // this.props.toggleIsFetching(true)
-        // //axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-        // api.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then((data) => {
-        //         this.props.setUsers(data.items)
-        //         this.props.setTotalUserCount(data.totalCount)
-        //         this.props.toggleIsFetching(false)
-        //     })
     }
 
     onPageChange = (pageNumber: number) => {
 
         this.props.getUsers(pageNumber, this.props.pageSize)
+        this.props.setCurrentPage(pageNumber)
 
-
-        // this.props.setCurrentPage(pageNumber)
-        // this.props.toggleIsFetching(true)
-        // //axios.get<UsersResponse>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-        // api.getUsers(pageNumber, this.props.pageSize)
-        //     .then((data) => {
-        //         this.props.setUsers(data.items)
-        //         this.props.toggleIsFetching(false)
-        //     })
     }
 
     render(): React.ReactNode {
@@ -69,6 +53,7 @@ type mapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
+    setCurrentPage: (currentPage: number)=> void
 }
 
 export type UsersContainerPropsType = mapStateToPropsType & mapDispatchToPropsType

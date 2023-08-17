@@ -3,10 +3,11 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {getUserProfile, getUserStatus, updateStatus} from "../../redux/profile-reducer";
-import { RouteComponentProps, withRouter} from "react-router-dom";
+ import { RouteComponentProps, withRouter} from "react-router-dom";
 import { ProfileResponseType} from "../../api/api";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+
 
 
 
