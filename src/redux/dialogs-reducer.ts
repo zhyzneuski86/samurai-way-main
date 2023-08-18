@@ -35,35 +35,26 @@ const initState: initStateType = {
     newMessageBody: ''
 }
 
-type ActionsType = ReturnType<typeof sendMessageAC> | ReturnType<typeof updateNewMessageBodyAC>
+type ActionsType = ReturnType<typeof sendMessageAC>
 
 
   const DialogsReducer  = (state= initState, action: ActionsType): initStateType => {
 
-    // let stateCopy = {...state}
-
       switch (action.type) {
-          case 'UPDATE-NEW-POST-TEXT':
-              // state.newMessageBody = action.body
-              // return state
-              return {...state, newMessageBody: action.body}
           case "SEND-MESSAGE":
-
               // const body = state.newMessageBody
               // state.newMessageBody = ''
               // state.messages.push({id: 7, message: body})
               // return state
               let newMessage = {
                   id: new Date().getTime(),
-                  message: state.newMessageBody
+                  message: action.newMessageBody
               }
               return {...state, messages: [...state.messages, newMessage], newMessageBody: ''}
           default:
               return state
       }
   }
-export const sendMessageAC = () => ({type: 'SEND-MESSAGE'} as const)
-export const updateNewMessageBodyAC = (text:string) =>
-{return {type: "UPDATE-NEW-POST-TEXT", body: text} as const}
+export const sendMessageAC = (newMessageBody: string) => ({type: 'SEND-MESSAGE', newMessageBody} as const)
 
 export default DialogsReducer;

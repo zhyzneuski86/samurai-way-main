@@ -32,7 +32,6 @@ const initState: InitStateType = {
 
 type ActionsType =
     ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatusAC>
 
@@ -44,15 +43,10 @@ const ProfileReducer = (state = initState, action: ActionsType): InitStateType =
             const newPost = {
                 id: new Date().getTime(),
                 // id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {...state, posts:[...state.posts, newPost], newPostText:''  }
-        case "CHANGE-NEW-TEXT":
-            // const stateCopy = {...state}
-            // stateCopy.newPostText = action.newText
-            // return stateCopy
-            return {...state, newPostText: action.newText}
         case "SET-USER-PROFILE":
             return {...state, posts:[...state.posts],
                 profile:  action.profile}
@@ -62,10 +56,8 @@ const ProfileReducer = (state = initState, action: ActionsType): InitStateType =
             return state
     }
 };
-export const addPostActionCreator = () => ({type: 'ADD-POST'} as const)
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {type: "CHANGE-NEW-TEXT", newText: text} as const
-}
+export const addPostActionCreator = (newPostText: string) => ({type: 'ADD-POST', newPostText} as const)
+
 export const setUserProfile = (profile: ProfileResponseType) => {
     return {type: "SET-USER-PROFILE", profile} as const
 }

@@ -1,9 +1,8 @@
-
-import {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import {addPostActionCreator} from "./profile-reducer";
 
 
 type NavReducerType = {}
-type ActionsType = ReturnType<typeof addPostActionCreator>  | ReturnType<typeof updateNewPostTextActionCreator>
+type ActionsType = ReturnType<typeof addPostActionCreator>
 
 const initState: NavReducerType = {
     nav: {}

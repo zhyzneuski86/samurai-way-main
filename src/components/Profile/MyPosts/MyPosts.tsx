@@ -1,40 +1,33 @@
-import React, {useState} from "react";
+import React, {FC, FormEvent} from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
+import Button from "@mui/material/Button";
+import {FieldConfig, FieldInputProps, useFormik} from "formik";
 
 
-    const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
 
-    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-        let onAddPost = () => {
-           props.addPost()
-//         props.dispatch(addPostActionCreator())
-    }
+    const postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-    let onPostChange = () => {
-        let text = newPostElement.current!.value
-        props.updateNewPostText(text)
-        // let action = updateNewPostTextActionCreator(text)
-        // props.dispatch(action)
+        const formik = useFormik({
+            initialValues: {
+                newPostText: ''
+            },
+            onSubmit: values => {
+                //props.sendMessage(values.newMessageBody)
+                props.addPost(values.newPostText)
+                formik.resetForm()
+            },
+        })
 
-    }
     return (
         <>
             <div className={classes.postsBlock}>
                 <h2>My posts</h2>
             </div>
-            <div>
-                <div>
-                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-            </div>
-
+            <AddNewPostForm handleSubmit={formik.handleSubmit} formikGetFieldProps={formik.getFieldProps}/>
             <div className={classes.posts}>
                 {postsElements}
             </div>
@@ -42,4 +35,30 @@ import {MyPostsPropsType} from "./MyPostsContainer";
     )
 }
 
+
+type AddNewPostFormPropsType = {
+    handleSubmit: (e?: FormEvent<HTMLFormElement> | undefined) => void
+    formikGetFieldProps: (nameOrOptions: string | FieldConfig<any>) => FieldInputProps<any>
+}
+const AddNewPostForm: FC<AddNewPostFormPropsType> = (props) => {
+
+    return <form onSubmit={props.handleSubmit}>
+
+        {/*<FormGroup>*/}
+        <div>
+            <div>
+                <textarea
+                    {...props.formikGetFieldProps('newPostText')}
+                />
+            </div>
+            <div>
+                <Button type={'submit'} variant={'contained'} color={'primary'}>
+                    Add post
+                </Button>
+            </div>
+        </div>
+        {/*</FormGroup>*/}
+    </form>
+
+}
 export default MyPosts;
