@@ -63,10 +63,11 @@ type FormikErrorType = {
                     <TextField
                         label="Email"
                         margin="normal"
-                        name='email'
-                        onChange={formik.handleChange}
-                        value={formik.values.email}
-                        onBlur={formik.handleBlur}
+                        // name='email'
+                        // onChange={formik.handleChange}
+                        // value={formik.values.email}
+                        // onBlur={formik.handleBlur}
+                        {...formik.getFieldProps('email')}
                     />
                     {formik.touched.email && formik.errors.email &&
                         <div style={{color: 'red'}}>{formik.errors.email}</div>}
@@ -76,10 +77,11 @@ type FormikErrorType = {
                         type="password"
                         label="Password"
                         margin="normal"
-                        name='password'
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
-                        onBlur={formik.handleBlur}
+                        // name='password'
+                        // onChange={formik.handleChange}
+                        // value={formik.values.password}
+                        // onBlur={formik.handleBlur}
+                        {...formik.getFieldProps('password')}
                     />
                     {/*{formik.errors.password ?  <div style={{color: 'red'}}>{formik.errors.password}</div>: null}*/}
                     {formik.touched.password && formik.errors.password &&
